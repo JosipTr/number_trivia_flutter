@@ -63,8 +63,12 @@ class TriviaControls extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        const Placeholder(
-          fallbackHeight: 40,
+        const TextField(
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            hintText: 'Input a number'
+          ),
         ),
         const SizedBox(
           height: 10,
@@ -79,9 +83,10 @@ class TriviaControls extends StatelessWidget {
             const SizedBox(
               width: 10,
             ),
-            const Expanded(
-                child: Placeholder(
-              fallbackHeight: 30,
+             Expanded(
+                child: ElevatedButton(
+                  onPressed: () {},
+              child: Text('Search'),
             )),
           ],
         )
