@@ -4,3 +4,9 @@ part of 'number_trivia_bloc.dart';
 abstract class NumberTriviaEvent {}
 
 class GetTriviaForRandomNumber extends NumberTriviaEvent {}
+
+class GetTriviaForConcreteNumber extends NumberTriviaEvent {
+  final int number;
+
+  GetTriviaForConcreteNumber(this.number);
+}

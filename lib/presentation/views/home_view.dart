@@ -4,6 +4,7 @@ import 'package:number_trivia/presentation/bloc/number_trivia_bloc.dart';
 import 'package:number_trivia/injector.dart';
 
 import '../widgets/loading_widget.dart';
+import '../widgets/trivia_controls.dart';
 import '../widgets/trivia_display.dart';
 
 class HomeView extends StatelessWidget {
@@ -15,13 +16,13 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Number Trivia'),
       ),
-      body: buildBody(context),
+      body: SingleChildScrollView(child: buildBody(context)),
     );
   }
 
   BlocProvider<NumberTriviaBloc> buildBody(BuildContext context) {
     return BlocProvider(
-        create: (_) => sl<NumberTriviaBloc>()..add(GetTriviaForRandomNumber()),
+        create: (_) => sl<NumberTriviaBloc>(),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(10),
@@ -34,11 +35,10 @@ class HomeView extends StatelessWidget {
                   builder: (context, state) {
                     if (state is Loading) {
                       return const LoadingWidget();
-                    }
-                    else if (state is Loaded) {
+                    } else if (state is Loaded) {
                       return TriviaDisplay(numberTrivia: state.trivia);
                     } else {
-                      return const Text('Error');
+                      return const Text('Start searching!', style: TextStyle(fontSize: 40),);
                     }
                   },
                 ),
@@ -52,49 +52,4 @@ class HomeView extends StatelessWidget {
           ),
         ));
   }
-}
-
-class TriviaControls extends StatelessWidget {
-  const TriviaControls({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        const TextField(
-          keyboardType: TextInputType.number,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: 'Input a number'
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Row(
-          children: <Widget>[
-            Expanded(
-                child: ElevatedButton(
-                  onPressed: () {dispatchRandom(context);},
-                  child: const Text('Random'),
-            )),
-            const SizedBox(
-              width: 10,
-            ),
-             Expanded(
-                child: ElevatedButton(
-                  onPressed: () {},
-              child: Text('Search'),
-            )),
-          ],
-        )
-      ],
-    );
-  }
-}
-
-void dispatchRandom(BuildContext context) {
-  BlocProvider.of<NumberTriviaBloc>(context).add(GetTriviaForRandomNumber());
 }

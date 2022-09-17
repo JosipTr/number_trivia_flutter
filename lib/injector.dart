@@ -14,7 +14,7 @@ final sl = GetIt.instance;
 Future<void> init() async {
 
   //Bloc
-  sl.registerFactory(() => NumberTriviaBloc(sl()));
+  sl.registerFactory(() => NumberTriviaBloc(sl(), sl()));
 
   //UseCases
   sl.registerLazySingleton(() => GetRandomNumberTrivia(sl()));
