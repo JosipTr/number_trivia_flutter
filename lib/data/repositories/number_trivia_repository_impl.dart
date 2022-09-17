@@ -16,4 +16,13 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
       return Left(Exception());
     }
   }
+  
+  @override
+  Future<Either<Exception, NumberTrivia>> getConcreteNumberTrivia(int number) async{
+    try{
+      return Right(await _numberTriviaRemoteDataSource.getConcreteNumberTrivia(number));
+    } catch (e) {
+      return Left(Exception());
+    }
+  }
 }

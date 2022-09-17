@@ -6,6 +6,7 @@ import 'package:number_trivia/presentation/bloc/number_trivia_bloc.dart';
 import 'package:http/http.dart' as http;
 
 import 'data/repositories/number_trivia_repository_impl.dart';
+import 'domain/usecases/get_concrete_number_trivia.dart';
 
 final sl = GetIt.instance;
 
@@ -17,6 +18,7 @@ Future<void> init() async {
 
   //UseCases
   sl.registerLazySingleton(() => GetRandomNumberTrivia(sl()));
+  sl.registerLazySingleton(() => GetConcreteNumberTrivia(sl()));
 
   //Repository
   sl.registerLazySingleton<NumberTriviaRepository>(() => NumberTriviaRepositoryImpl(sl()));
